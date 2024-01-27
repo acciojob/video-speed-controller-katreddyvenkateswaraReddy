@@ -16,68 +16,6 @@
 
 <script  src="./script.js">
   //Your code goes here
-	const video = document.querySelector('.flex');
-const playButton = document.querySelector('.player__button');
-const volumeRange = document.querySelector('.player__slider[name="volume"]');
-const playbackSpeedRange = document.querySelector('.player__slider[name="playbackRate"]');
-const skipButtons = document.querySelectorAll('.player__button[data-skip]');
-const progressBar = document.querySelector('.progress__filled');
-const progressContainer = document.querySelector('.progress');
-
-function togglePlay() {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-}
-
-function updatePlayButton() {
-  playButton.textContent = video.paused ? '►' : '❚ ❚';
-}
-
-function handleVolumeChange() {
-  video.volume = volumeRange.value;
-}
-
-function handlePlaybackSpeedChange() {
-  video.playbackRate = playbackSpeedRange.value;
-}
-
-function skip() {
-  const skipSeconds = parseFloat(this.dataset.skip);
-  video.currentTime += skipSeconds;
-}
-
-function updateProgressBar() {
-  const progress = (video.currentTime / video.duration) * 100;
-  progressBar.style.flexBasis = `${progress}%`;
-}
-
-function scrub(event) {
-  const clickTime = (event.offsetX / progressContainer.offsetWidth) * video.duration;
-  video.currentTime = clickTime;
-}
-
-video.addEventListener('click', togglePlay);
-video.addEventListener('play', updatePlayButton);
-video.addEventListener('pause', updatePlayButton);
-video.addEventListener('timeupdate', updateProgressBar);
-
-playButton.addEventListener('click', togglePlay);
-
-volumeRange.addEventListener('input', handleVolumeChange);
-
-playbackSpeedRange.addEventListener('input', handlePlaybackSpeedChange);
-
-skipButtons.forEach(button => button.addEventListener('click', skip));
-
-let mousedown = false;
-progressContainer.addEventListener('click', scrub);
-progressContainer.addEventListener('mousemove', (event) => mousedown && scrub(event));
-progressContainer.addEventListener('mousedown', () => mousedown = true);
-progressContainer.addEventListener('mouseup', () => mousedown = false);
-
 </script>
 </body>
 </html>
