@@ -8,96 +8,20 @@
 <body>
 
   <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" controls></video>
+    <video id="myVideo" class="flex" width="765" height="430" controls>
+		<source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"  type="video/mp4">
+	</video>
+	  <div>
+		    <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+	  </div>
     <div class="speed">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
-	<video class="player__video viewer" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"></video>
-    <div class="player__controls">
-      <div class="progress">
-        <div class="progress__filled"></div>
-      </div>
-      <button class="player__button toggle" title="Toggle Play">►</button>
-      <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value="1">
-      <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1" value="1">
-      <button data-skip="-10" class="player__button skip-back">« 10s</button>
-      <button data-skip="25" class="player__button skip-forward">25s »</button>
-    </div>
-  </div>
-
 <script  src="./script.js">
-<!--   //Your code goes here -->
-	const player = document.querySelector('.player');
-const video = player.querySelector('.viewer');
-const progress = player.querySelector('.progress');
-const progressBar = player.querySelector('.progress__filled');
-const toggle = player.querySelector('.toggle');
-const volumeSlider = player.querySelector('input[name="volume"]');
-const playbackSpeedSlider = player.querySelector('input[name="playbackRate"]');
-const skipButtons = player.querySelectorAll('[data-skip]');
- 
-// Functions
- 
-// Toggle play/pause
-function togglePlay() {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-}
- 
-// Update play/pause button icon
-function updateButton() {
-  const icon = video.paused ? '►' : '❚ ❚';
-  toggle.textContent = icon;
-}
- 
-// Skip video
-function skip() {
-  video.currentTime += parseFloat(this.dataset.skip);
-}
- 
-// Update volume
-function handleVolumeChange() {
-  video.volume = this.value;
-}
- 
-// Update playback speed
-function handlePlaybackRateChange() {
-  video.playbackRate = this.value;
-}
- 
-// Update progress bar
-function handleProgress() {
-  const percent = (video.currentTime / video.duration) * 100;
-  progressBar.style.flexBasis = `${percent}%`;
-}
- 
-// Seek within video
-function scrub(e) {
-  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-  video.currentTime = scrubTime;
-}
- 
-// Event listeners
-video.addEventListener('click', togglePlay);
-video.addEventListener('play', updateButton);
-video.addEventListener('pause', updateButton);
-video.addEventListener('timeupdate', handleProgress);
- 
-toggle.addEventListener('click', togglePlay);
-skipButtons.forEach(button => button.addEventListener('click', skip));
-volumeSlider.addEventListener('input', handleVolumeChange);
-playbackSpeedSlider.addEventListener('input', handlePlaybackRateChange);
- 
-let mousedown = false;
-progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
-progress.addEventListener('mousedown', () => mousedown = true);
-progress.addEventListener('mouseup', () => mousedown = false);
+  //Your code goes here
 </script>
 </body>
 </html>
